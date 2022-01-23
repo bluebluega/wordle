@@ -28,6 +28,6 @@ public class WordleGame {
         System.out.println("\"?\" = the letter is NOT part of the word.");
         System.out.println("\"*\" = the letter is part of the word but is in the wrong location.");
         System.out.println("\"!\" = the letter is part of the word AND is in the correct location. \n");
-        System.out.println("After each guess, you will be shown the letters that you have NOT YET used as well as the letters that have you guessed correctly. Good luck!");
+        System.out.println("After each guess, you will be shown the letters that you have not yet used as well as the letters that have you guessed correctly. Good luck!");
     }
 }
