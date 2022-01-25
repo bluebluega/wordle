@@ -23,18 +23,28 @@ public class Puzzle{
         lettersInWord = new ArrayList<String>();
     }
 
+    /**
+     * Checks whether or not the game is over
+     */
     public boolean gameNotOver(){
         return numGuesses<6;
     }
 
+    /**
+     * Checks whether or not the game is solved
+     */
     public boolean isUnsolved(){
         return numCorrectGuesses<5;
     }
 
+    /**
+     * Evaluates the guess and shows how correct the guess is
+     */
     public void evaluate(String g){
         numCorrectGuesses=0;
+
         if(g.length()!=5){
-            System.out.println("Guess must be 5 letters. Try again");
+            System.out.println("Guess must be 5 letters. Try again.");
         } else{
             if(isWord(g)){
                 numGuesses++;
@@ -61,16 +71,26 @@ public class Puzzle{
                 System.out.println("Correctly guessed letters: " + lettersInWord);
             }
             else {
-                System.out.println("Guess must be an existing word. Try again");
+                boolean criteria = true;
+                for(int i=0; i<g.length(); i++){
+                    String l = g.substring(i,i+1);
+
+                    if(g.indexOf(l)!=g.lastIndexOf(l)){   
+                        criteria = false;
+                    }
+                }
+                
+                if (!criteria){
+                    System.out.println("Guess cannot include repeating letters. Try again.");
+                } else System.out.println("Guess must be an existing word. Try again.");
             }
         }
-        //System.out.println("Correct guess: " + numCorrectGuesses);
-        //System.out.println("Number of guesses: " + numGuesses);
-        //System.out.println("Is the game still going?"+ gameNotOver());
-        //System.out.println("Is the game UNsolved?"+isUnsolved());
         System.out.println("\n");
     }
 
+    /**
+     * Checks whether or not the guess is part of the word.txt file
+     */
     public boolean isWord(String g){
         boolean isrealWord = false;
         if (vocabList.contains(g.toLowerCase())){
@@ -79,6 +99,9 @@ public class Puzzle{
         return isrealWord;
     }
 
+    /**
+     * Inputs all the five letter words w/ non repeating letters into the arraylist vocabList
+     */
     public void loadWords(String filename){
         String ans = "";
         File wordfile = new File(filename);
@@ -87,7 +110,19 @@ public class Puzzle{
             while (fileScanner.hasNext()){
                 String w = fileScanner.nextLine();
                 if(w.length()==5 && !Character.isUpperCase(w.charAt(0))){
-                    vocabList.add(w);
+                    boolean criteria = true;
+
+                    for(int i=0; i<w.length(); i++){
+                        String l = w.substring(i,i+1);
+
+                        if(w.indexOf(l)!=w.lastIndexOf(l)){   
+                            criteria = false;
+                        }
+                    }
+
+                    if(criteria){
+                        vocabList.add(w);
+                    }
                 }
             }
         } catch(FileNotFoundException e){
@@ -95,6 +130,9 @@ public class Puzzle{
         }
     }
 
+    /**
+     * Loads arraylist with all the letters
+     */
     public void loadAlpha(){
         String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -103,18 +141,27 @@ public class Puzzle{
         }
     }
 
+    /**
+     * Adds letters to the correctly guessed letters list
+     */
     public void addLetter(String l){
         if(!lettersInWord.contains(l)){
             lettersInWord.add(l);
         }
     }
 
+    /**
+     * Removes letters that have been used
+     */
     public void removeLetter(String l){
         if(alphabet.contains(l)){
             alphabet.remove(alphabet.indexOf(l));
         }
     }
 
+    /**
+     * Returns the word
+     */
     public String getWord(){
         return word;
     }
