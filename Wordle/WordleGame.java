@@ -34,6 +34,7 @@ public class WordleGame {
         
         if(again.equals("Y")){
             System.out.println("\n");
+            clearScreen();
             main(null);
         } else {
             System.out.println("\nGAME OVER. Thank you for playing!");
@@ -48,5 +49,9 @@ public class WordleGame {
         System.out.println("\"*\" = the letter is part of the word but is in the wrong location.");
         System.out.println("\"!\" = the letter is part of the word AND is in the correct location. \n");
         System.out.println("After each guess, you will be shown all the letters that you have not yet used & the letters that you have guessed correctly. Good luck!");
+    }
+    
+    public static void clearScreen() {
+        System.out.println("\f");
     }
 }

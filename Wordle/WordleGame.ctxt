@@ -7,4 +7,6 @@ comment2.target=void\ runAgain()
 comment2.text=\r\n\ Runs/ends\ the\ program\ once\ the\ game\ is\ over\r\n
 comment3.params=
 comment3.target=void\ instructions()
-numComments=4
+comment4.params=
+comment4.target=void\ clearScreen()
+numComments=5
